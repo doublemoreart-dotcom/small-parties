@@ -16,11 +16,12 @@
 ## 建議更新流程
 
 1. 修改 `index.html`。
-2. 執行 `make update`，一次確認 `index.html` 入口、favicon、JavaScript 語法、必要素材、必要章節、錨點與 Git 狀態。
+2. 執行 `make update`，一次確認 `index.html` 入口、favicon、JavaScript 語法、必要素材、必要章節、錨點與本機 Git 狀態。此指令不會推送 Git。
 3. 執行 `make serve`，用本機網址檢查畫面。
 4. 另開終端執行 `make preview-check`，確認本機預覽伺服器有回應。
 5. 確認重點區塊：Header/Menu、主視覺、公式圖像、放大流程、演算法對立線、政治收益、成本報價表、民眾黨案例、辨識清單。
-6. 若要上 Git，執行 `make git-ready` 後再 commit。
+6. 若要建立本機 commit，執行 `make commit-ready` 後再 commit。
+7. 推送 GitHub 必須由使用者明確下達「推 git / push」指令後才執行。
 
 ## 常用指令
 
@@ -28,10 +29,18 @@
 make help
 make update
 make check
+make local-status
+make commit-ready
 make serve
 make preview-check
 make git-ready
 ```
+
+## Git 操作原則
+
+- 日常改動只針對本機版。
+- `make update`、`make check`、`make commit-ready` 都不會執行 `git push`。
+- 推送遠端必須由使用者明確確認後才執行。
 
 本機預覽預設網址：
 

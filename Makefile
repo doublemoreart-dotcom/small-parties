@@ -1,11 +1,13 @@
 PORT ?= 8011
 URL := http://127.0.0.1:$(PORT)/
 
-.PHONY: help check serve preview-check update git-ready
+.PHONY: help check serve preview-check update local-status commit-ready git-ready
 
 help:
 	@echo "常用更新流程："
-	@echo "  make update      檢查入口、素材、頁面結構、JS 語法與 Git 狀態"
+	@echo "  make update      本機檢查入口、素材、頁面結構、JS 語法與 Git 狀態（不推送）"
+	@echo "  make local-status 顯示本機與遠端差異狀態"
+	@echo "  make commit-ready 上 commit 前檢查 staged/unstaged 狀態"
 	@echo "  make serve       啟動本機預覽：$(URL)"
 	@echo "  make preview-check  確認本機預覽伺服器有回應"
 	@echo "  make git-ready   上 Git 前檢查"
@@ -25,15 +27,32 @@ preview-check:
 	@curl -fsI "$(URL)" >/dev/null
 	@echo "OK: preview server responds at $(URL)"
 
-update: check git-ready
-	@echo "OK: update checks complete."
+update: check local-status
+	@echo "OK: local update checks complete. No git push was run."
 	@echo "Preview with: make serve"
 	@echo "URL: $(URL)"
 
-git-ready: check
+local-status:
 	@if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
 		git status --short --branch; \
-		git diff --check; \
+		if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then \
+			echo "Remote tracking: $$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"; \
+		else \
+			echo "Remote tracking: none"; \
+		fi; \
 	else \
 		echo "INFO: not a git repository yet. Run: git init -b main"; \
 	fi
+
+commit-ready: check
+	@if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
+		git status --short --branch; \
+		git diff --check; \
+		git diff --cached --check; \
+		echo "OK: commit readiness checks complete. Review changes before committing."; \
+	else \
+		echo "INFO: not a git repository yet. Run: git init -b main"; \
+	fi
+
+git-ready: commit-ready
+	@echo "Reminder: pushing to GitHub requires an explicit user command."
