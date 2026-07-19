@@ -2,12 +2,14 @@ PORT ?= 8011
 URL := http://127.0.0.1:$(PORT)/
 LIVE_URL ?= https://dinopeng.com/small-parties/
 
-.PHONY: help check qa serve preview-check live-check update local-status commit-ready ship-check git-ready
+.PHONY: help check assets-check mobile-check qa serve preview-check live-check update local-status commit-ready ship-check git-ready
 
 help:
 	@echo "常用更新流程："
 	@echo "  make update      本機更新檢查：內容稽核、JS 語法與 Git 狀態（不推送）"
-	@echo "  make qa          本機品質檢查：內容稽核、JS 語法與 diff whitespace"
+	@echo "  make qa          本機品質檢查：內容、資產、JS 語法與 diff whitespace"
+	@echo "  make assets-check 檢查 favicon、社群縮圖尺寸與中間檔"
+	@echo "  make mobile-check 檢查手機版關鍵 RWD 保護"
 	@echo "  make local-status 顯示本機與遠端差異狀態"
 	@echo "  make commit-ready 上 commit 前檢查 staged/unstaged 狀態"
 	@echo "  make serve       啟動本機預覽：$(URL)"
@@ -22,7 +24,13 @@ check:
 	@awk '/<script>/{flag=1; next} /<\/script>/{flag=0} flag' index.html | node --check -
 	@echo "OK: index.html entry, favicon, assets, and inline JavaScript look good."
 
-qa: check
+assets-check:
+	@node scripts/audit-assets.mjs
+
+mobile-check:
+	@node scripts/audit-mobile.mjs
+
+qa: check assets-check mobile-check
 	@git diff --check
 	@git diff --cached --check
 	@echo "OK: local QA checks complete."

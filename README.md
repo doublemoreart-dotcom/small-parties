@@ -11,6 +11,8 @@
 - `assets/social-thumbnail.svg`：社群轉發縮圖原稿。
 - `Makefile`：本機預覽與檢查流程。
 - `scripts/audit-page.mjs`：零依賴頁面稽核，檢查必要章節、錨點、preload、favicon、社群縮圖、互動元件與手機版防溢出結構。
+- `scripts/audit-assets.mjs`：零依賴資產稽核，檢查 favicon、主視覺、社群縮圖尺寸、檔案大小與中間檔。
+- `scripts/audit-mobile.mjs`：零依賴手機版稽核，檢查手機版表格橫滑提示、寬圖 fallback、字級規則、對立線箭頭與卡片裝飾線狀態。
 
 預設頁面入口為 `index.html`。頁面載入時會顯示整頁 preloader，完成載入後淡出；主視覺圖片另以 `<link rel="preload">` 預先載入。
 社群轉發會使用 `https://dinopeng.com/small-parties/assets/social-thumbnail.png` 作為預覽圖。
@@ -19,7 +21,7 @@
 ## 建議更新流程
 
 1. 修改 `index.html` 或相關文件。
-2. 執行 `make update`，完成本機 QA 與 Git 狀態檢查。此指令不會推送 Git。
+2. 執行 `make update`，完成本機 QA、資產稽核、手機版稽核與 Git 狀態檢查。此指令不會推送 Git。
 3. 執行 `make serve`，用本機網址檢查畫面。
 4. 另開終端執行 `make preview-check`，確認本機預覽伺服器有回應。
 5. 手動確認重點區塊：Header/Menu、主視覺、公式圖像、放大流程、演算法對立線、政治收益、成本報價表、民眾黨案例、辨識清單。
@@ -36,6 +38,8 @@ make help
 make update
 make qa
 make check
+make assets-check
+make mobile-check
 make local-status
 make commit-ready
 make serve
@@ -48,7 +52,7 @@ make git-ready
 ## Git 操作原則
 
 - 日常改動只針對本機版。
-- `make update`、`make check`、`make qa`、`make commit-ready`、`make ship-check` 都不會執行 `git push`。
+- `make update`、`make check`、`make assets-check`、`make qa`、`make commit-ready`、`make ship-check` 都不會執行 `git push`。
 - 推送遠端必須由使用者明確確認後才執行。
 
 本機預覽預設網址：
