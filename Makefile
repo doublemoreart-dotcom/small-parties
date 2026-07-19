@@ -1,6 +1,7 @@
 PORT ?= 8011
 URL := http://127.0.0.1:$(PORT)/
 LIVE_URL ?= https://dinopeng.com/small-parties/
+SPORTTECH_URL ?= https://dinopeng.com/sporttech/
 
 .PHONY: help check assets-check mobile-check qa serve preview-check live-check update local-status commit-ready ship-check git-ready
 
@@ -15,13 +16,13 @@ help:
 	@echo "  make serve       啟動本機預覽：$(URL)"
 	@echo "  make preview-check  確認本機預覽伺服器有回應"
 	@echo "  make ship-check  上 Git 前完整檢查（不推送）"
-	@echo "  make live-check  確認線上網址有回應：$(LIVE_URL)"
+	@echo "  make live-check  確認線上網址有回應：$(LIVE_URL) 與 $(SPORTTECH_URL)"
 	@echo "  make git-ready   上 Git 前提醒"
 	@echo "  make check       基本檔案、頁面結構與 inline JS 檢查"
 
 check:
 	@node scripts/audit-page.mjs
-	@awk '/<script>/{flag=1; next} /<\/script>/{flag=0} flag' index.html | node --check -
+	@node scripts/check-inline-js.mjs
 	@echo "OK: index.html entry, favicon, assets, and inline JavaScript look good."
 
 assets-check:
@@ -47,6 +48,8 @@ preview-check:
 live-check:
 	@curl -L -fsI "$(LIVE_URL)" >/dev/null
 	@echo "OK: live site responds at $(LIVE_URL)"
+	@curl -L -fsI "$(SPORTTECH_URL)" >/dev/null
+	@echo "OK: live site responds at $(SPORTTECH_URL)"
 
 update: qa local-status
 	@echo "OK: local update checks complete. No git push was run."

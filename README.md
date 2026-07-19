@@ -10,9 +10,10 @@
 - `assets/social-thumbnail.png`：社群轉發縮圖，Open Graph / Twitter card 使用，尺寸為 1200 × 630。
 - `assets/social-thumbnail.svg`：社群轉發縮圖原稿。
 - `Makefile`：本機預覽與檢查流程。
-- `scripts/audit-page.mjs`：零依賴頁面稽核，檢查必要章節、錨點、preload、favicon、社群縮圖、互動元件與手機版防溢出結構。
+- `scripts/audit-page.mjs`：零依賴頁面稽核，檢查必要章節、錨點、preload、favicon、社群縮圖、GA tag、互動元件與手機版防溢出結構。
 - `scripts/audit-assets.mjs`：零依賴資產稽核，檢查 favicon、主視覺、社群縮圖尺寸、檔案大小與中間檔。
 - `scripts/audit-mobile.mjs`：零依賴手機版稽核，檢查手機版表格橫滑提示、寬圖 fallback、字級規則、對立線箭頭與卡片裝飾線狀態。
+- `scripts/check-inline-js.mjs`：零依賴 JavaScript 語法稽核，只檢查沒有 `src` 的 inline JavaScript，避免外部追蹤碼或其他 script type 影響流程。
 
 預設頁面入口為 `index.html`。頁面載入時會顯示整頁 preloader，完成載入後淡出；主視覺圖片另以 `<link rel="preload">` 預先載入。
 社群轉發會使用 `https://dinopeng.com/small-parties/assets/social-thumbnail.png` 作為預覽圖。
@@ -29,7 +30,7 @@
 7. 上 Git 前執行 `make ship-check`。它會檢查本機 QA 與預覽伺服器，但不會推送。
 8. 若要建立本機 commit，執行 `make commit-ready` 後再 commit。
 9. 推送 GitHub 必須由使用者明確下達「推 git / push」指令後才執行。
-10. 推送後可執行 `make live-check`，確認線上網址有回應。
+10. 推送後可執行 `make live-check`，確認 `small-parties` 與 `sporttech` 兩個線上網址都有回應。
 
 ## 常用指令
 

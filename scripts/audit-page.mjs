@@ -32,10 +32,11 @@ if (missingTargets.length) {
 
 const requiredUi = [
   ['preload hero image', /<link[^>]+rel=["']preload["'][^>]+hero-social-discourse\.png/],
-  ['shortcut fav.ico', /<link[^>]+rel=["']shortcut icon["'][^>]+fav\.ico/],
+  ['shortcut favicon.ico', /<link[^>]+rel=["']shortcut icon["'][^>]+favicon\.ico/],
   ['Open Graph thumbnail', /<meta[^>]+property=["']og:image["'][^>]+social-thumbnail\.png/],
   ['Open Graph dimensions', /<meta[^>]+property=["']og:image:width["'][^>]+1200[\s\S]*<meta[^>]+property=["']og:image:height["'][^>]+630/],
   ['Twitter large image card', /<meta[^>]+name=["']twitter:card["'][^>]+summary_large_image/],
+  ['Google Analytics tag', /googletagmanager\.com\/gtag\/js\?id=G-T2WMCYX21T[\s\S]*gtag\('config', 'G-T2WMCYX21T'\)/],
   ['page preloader', /class=["']page-preloader["']/],
   ['Heroicons sprite', /<svg[^>]+aria-hidden=["']true["'][^>]*>[\s\S]*<symbol id=["']icon-/],
   ['sticky navigation', /class=["']site-nav["']/],
