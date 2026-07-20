@@ -1,5 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#071112"/>
-  <rect x="10" y="10" width="44" height="44" rx="12" fill="#28d8be"/>
-  <path d="M20 19h24v7H20v-7Zm8 12h8v15h-8V31Zm-8 15h24v5H20v-5Z" fill="#f5fffd"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="48%" r="58%">
+      <stop offset="0" stop-color="#1ff4dd" stop-opacity=".34"/>
+      <stop offset=".56" stop-color="#0c3e3e" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#03070b"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="14" y1="14" x2="50" y2="50">
+      <stop stop-color="#72fff0"/>
+      <stop offset="1" stop-color="#08d7c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#03070b"/>
+  <rect x="7" y="7" width="50" height="50" rx="14" fill="url(#glow)" stroke="#2af5e3" stroke-opacity=".55"/>
+  <path d="M18 19.5h26a6.5 6.5 0 0 1 6.5 6.5v11a6.5 6.5 0 0 1-6.5 6.5H31.5l-9 7v-7H18a6.5 6.5 0 0 1-6.5-6.5V26a6.5 6.5 0 0 1 6.5-6.5Z" fill="none" stroke="url(#cyan)" stroke-width="4.2" stroke-linejoin="round"/>
+  <path d="M26 32h4.5l8-5.5v16l-8-5.5H26a2.5 2.5 0 0 1-2.5-2.5v-1A2.5 2.5 0 0 1 26 32Z" fill="url(#cyan)"/>
+  <path d="M43 29.5c2.2 2.2 2.2 6.8 0 9M48 25.5c4.6 4.8 4.6 12.2 0 17" fill="none" stroke="#6affef" stroke-width="3.6" stroke-linecap="round"/>
 </svg>

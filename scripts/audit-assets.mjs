@@ -49,8 +49,12 @@ requireIco('favicon.ico');
 requireFile('favicon.svg');
 requirePngSize('assets/hero-social-discourse.png', 1600, 900);
 requirePngSize('assets/social-thumbnail.png', 1200, 630);
+requirePngSize('assets/menu-icon.png', 256, 256);
+requirePngSize('assets/tpp-logo.png', 1182, 1182);
 requireFile('assets/social-thumbnail.svg');
 requireBelow('assets/social-thumbnail.png', 1_000_000);
+requireBelow('assets/menu-icon.png', 200_000);
+requireBelow('assets/tpp-logo.png', 100_000);
 
 const generatedJunk = [
   'assets/social-thumbnail.svg.png',

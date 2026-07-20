@@ -7,8 +7,10 @@
 - `index.html`：主要網頁內容、樣式與互動試算器。
 - `fav.ico` / `favicon.ico` / `favicon.svg`：瀏覽器分頁圖示與舊瀏覽器相容檔名。
 - `assets/hero-social-discourse.png`：首頁主視覺背景。
+- `assets/menu-icon.png`：Header/Menu 使用的網站圖示。
 - `assets/social-thumbnail.png`：社群轉發縮圖，Open Graph / Twitter card 使用，尺寸為 1200 × 630。
 - `assets/social-thumbnail.svg`：社群轉發縮圖原稿。
+- `assets/tpp-logo.png`：民眾黨案例區使用的正式政黨 Logo 圖檔。
 - `Makefile`：本機預覽與檢查流程。
 - `scripts/audit-page.mjs`：零依賴頁面稽核，檢查必要章節、錨點、preload、favicon、社群縮圖、GA tag、互動元件與手機版防溢出結構。
 - `scripts/audit-assets.mjs`：零依賴資產稽核，檢查 favicon、主視覺、社群縮圖尺寸、檔案大小與中間檔。
